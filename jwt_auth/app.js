@@ -7,13 +7,13 @@ const jwt = require('jsonwebtoken')
 const userDb=require("./model/user")
 const authMiddelware = require("./middleware/auth")
 const app = express()
-
+const path=require('path')
 //midellware
 app.use(express.json())
 app.use(morgan('dev'))
 
 //authentification
-app.post('/login',async (req,res)=>{
+app.post('/login',authMiddelware.loggedIn,async (req,res)=>{
     let reqPassword = req.body.password
     let reqEmail= req.body.email
     if(!reqPassword|| !reqEmail ){
