@@ -73,6 +73,11 @@ app.get('/github/Oauth/callback',(req, res) => {
         });
 })
 
-app.listen(port,()=>{
-    console.log(`server running on http://127.0.0.1:${port}`)
+app.listen(port)
+.on('error', function(err) {
+    console.log("Errr");
+    process.exit(1);
 })
+.on("listening",()=>{
+    console.log(`server running on http://127.0.0.1:${port}`)
+})% 
